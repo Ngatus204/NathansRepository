@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <div id="courses"></div>
+
+    <button id="login-logout-btn"></button>
+    <button id="account-btn"></button>
+
+    <script src="../app.js"></script>
+    <script>
+
+      const myElement = document.getElementById("courses");
+      const loginLogoutBtn = document.getElementById("login-logout-btn");
+      const accountBtn = document.getElementById("account-btn");
+
+      //Send data received from server to the element
+      const fetchData = () => {
+        fetch("/")
+          .then(response => response.text())
+          .then(data => {
+            const coursesData = JSON.parse(data);
+            myElement.innerText = JSON.stringify(coursesData);
+          })
+          .catch(error => console.error(error));
+      };
+
+      fetchData();
+
+      // Show Login or Logout button depending on login status
+      if (sessionStorage) {
+        loginLogoutBtn.innerText = "Logout";
+        loginLogoutBtn.addEventListener("click", () => {
+          logoutUser();
+        });
+
+        accountBtn.innerText = "Account";
+        accountBtn.addEventListener("click", () => {
+          window.location.href = "account.html";
+        });
+      } else {
+        loginLogoutBtn.innerText = "Login";
+        loginLogoutBtn.addEventListener("click", () => {
+          window.location.href = "login.html";
+        });
+
+        accountBtn.style.display = "none";
+      }
+
+    </script>
+  </body>
+</html>
