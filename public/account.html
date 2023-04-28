@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Account</title>
+  </head>
+  <body>
+    <div id="user-info"></div>
+    <button id="add-course-btn">Add Course</button>
+    <button id="delete-course-btn">Delete Course</button>
+
+    <script src="../app.js"></script>
+    <script>
+      let userId = prompt("Enter User ID:");
+      while (userId === "" || isNaN(userId)) {
+        userId = prompt("Invalid input. Please enter a valid User ID:");
+      }
+      const user = findUserById(userId);
+      const userInfo = JSON.stringify(user);
+      const userInfoElement = document.getElementById("user-info");
+      userInfoElement.innerText = userInfo;
+
+      const addCourseBtn = document.getElementById("add-course-btn");
+      addCourseBtn.addEventListener("click", () => {
+        const courseCode = prompt("Enter Course Code:");
+        const courseTitle = prompt("Enter Course Title:");
+        const courseDesc = prompt("Enter Course Description:");
+        addCourseToUser(userId, courseCode, courseTitle, courseDesc);
+      });
+
+      const deleteCourseBtn = document.getElementById("delete-course-btn");
+      deleteCourseBtn.addEventListener("click", () => {
+        const code = prompt("Enter Course Code to Delete:");
+        deleteCourseFromUser(userId, code);
+      });
+    </script>
+  </body>
+</html>
