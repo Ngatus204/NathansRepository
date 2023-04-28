@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <div id="user-info"></div>
+    
+    <script src="../app.js"></script>
+    <script>
+      let username = prompt("Enter Username:");
+      while (username === "" || isNaN(username)) {
+        username = prompt("Invalid input. Please enter a valid Username:");
+      }
+      let password = prompt("Enter Password:");
+      while (password === "" || isNaN(password)) {
+        password = prompt("Invalid input. Please enter a valid Password:");
+      }
+      const user = verifyUser(userId);
+      const userInfo = JSON.stringify(user);
+      const userInfoElement = document.getElementById("user-info");
+      userInfoElement.innerText = userInfo;
+    </script>
+    
+    <a href="signup.html">Sign Up</a>
+  </body>
+</html>
